@@ -1,0 +1,34 @@
+name: CI Check
+# 1. กำหนดเหตุการณ์: ให้รันเมื่อมีการ Push หรือ Pull Request เข้าหา branch main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # ใช้เครื่อง Linux ของ GitHub
+
+    steps:
+      # 2. ดึงโค้ดจาก Repo ลงมาที่เครื่อง Runner
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 3. ติดตั้ง Node.js (โปรเจกต์นี้ใช้ Node)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm' # ช่วยให้ติดตั้งครั้งต่อไปเร็วขึ้น
+
+      # 4. ติดตั้ง Dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 5. รันการตรวจสอบ Lint (ดูว่าเขียนโค้ดถูกระเบียบไหม)
+      - name: Run Lint
+        run: npm run lint
+
+      # 6. ลอง Build โปรเจกต์
+      - name: Build project
+        run: npm run build

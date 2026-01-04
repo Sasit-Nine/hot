@@ -5,7 +5,7 @@ const Hero = () => (
         {`Find `}
 
         <span className="bg-gradient-to-r from-gradFirst via-gradMiddle to-gradLast bg-clip-text text-transparent">
-          Open-Source Repositories Trigger Workflow
+          Open-Source Repositories Trigger Workflow Edit
         </span>
         <br />
         trending today.
